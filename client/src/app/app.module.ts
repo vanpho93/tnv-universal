@@ -1,8 +1,9 @@
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import { CommonModule } from '@angular/common';
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
     CommonModule,
     NgtUniversalModule,
     HttpModule,
-    BrowserTransferStateModule
+    BrowserTransferStateModule,
+    FormsModule
   ],
   providers: [],
 })

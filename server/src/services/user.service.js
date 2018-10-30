@@ -39,7 +39,7 @@ class UserService {
         .catch(() => {
             throw new ServerError('INVALID_TOKEN', 400);
         });
-        const user = await User.findById(_id).select('_id name email');
+        const user = await User.findById(_id).select('_id name email avatar');
         exist(user, 'CANNOT_FIND_USER', 404)
         const newToken = await sign({ _id: user._id });
         const userInfo = user.toObject();

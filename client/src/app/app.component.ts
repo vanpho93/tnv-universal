@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
-
-const TODO_KEY = makeStateKey('TODO_KEY');
+import { Http, Headers } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -11,21 +8,38 @@ const TODO_KEY = makeStateKey('TODO_KEY');
 })
 
 export class AppComponent implements OnInit {
-  title = 'tnv-universal';
-  data = null;
+  user = null;
+  email = 'teo@gmail.com';
+  password = '';
+  constructor(private http: Http) {}
 
-  constructor(private http: Http, private state: TransferState) {}
-
-  ngOnInit() {
-    this.data = this.state.get(TODO_KEY, null);
-    if (this.data) { return; }
-    const URL = 'https://jsonplaceholder.typicode.com/todos/1';
-    this.http.get(URL)
+  signIn() {
+    const URL = 'http://localhost:3000/user/signin';
+    const { email, password } = this;
+    this.http.post(URL, { email, password })
     .toPromise()
     .then(res => res.json())
     .then(resJson => {
-      this.data = resJson;
-      this.state.set(TODO_KEY, resJson);
-    });
+      this.user = resJson.user;
+      localStorage.setItem('token', this.user.token);
+    })
+    .catch(() => alert('Invalid user info'));
+  }
+
+  ngOnInit() {
+    const URL = 'http://localhost:3000/user/check';
+    const headers = new Headers({ token: localStorage.getItem('token') });
+    this.http.get(URL, { headers })
+    .toPromise()
+    .then(res => res.json())
+    .then(resJson => {
+      this.user = resJson.user;
+    })
+    .catch(() => console.log('Invalid token'));
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.user = null;
   }
 }
