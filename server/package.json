@@ -1,0 +1,26 @@
+{
+  "name": "testing0705",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/vanpho93/testing0705.git",
+  "author": "Van Pho Nguyen <vanpho02@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "4.13.7"
+  },
+  "scripts": {
+    "server": "nodemon src/index.js",
+    "test": "nodemon --exec mocha --recursive",
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "supertest": "^3.1.0"
+  }
+}
