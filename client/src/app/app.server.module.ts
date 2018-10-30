@@ -5,6 +5,7 @@ import { ServerModule, ServerTransferStateModule } from '@angular/platform-serve
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ServerCookiesModule } from './cookies/server/server-cookies.module';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -15,6 +16,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
         ServerModule,
         NoopAnimationsModule,
         ModuleMapLoaderModule,
+        ServerCookiesModule.forRoot(),
         ServerTransferStateModule, // comment
     ]
 })
